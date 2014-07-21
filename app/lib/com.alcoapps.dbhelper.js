@@ -184,6 +184,7 @@ dbhelper.prototype.set = function (obj) {
     keys.forEach(function (item) {
         switch (typeof obj.data[item]) {
             case "string":
+            	obj.data[item].replace(/"/g, '""'); 		// add string escape
                 vals.push('"' + obj.data[item] + '"');
                 break;
             case "number":
@@ -230,7 +231,7 @@ dbhelper.prototype.countRows = function (obj, callback) {
 
     var sql = 'SELECT COUNT(id) as counter FROM ' + obj.table;
     if (obj.where) {
-        sql += ' WHERE ' + where;
+        sql += ' WHERE ' + obj.where;
     }
 
     var result = this.getData(sql);
@@ -255,6 +256,7 @@ dbhelper.prototype.update = function (obj) {
     keys.forEach(function (item) {
         switch (typeof obj.data[item]) {
             case "string":
+            	obj.data[item].replace(/"/g, '""'); 		// add string escape
                 sets.push(item + ' = "' + obj.data[item] + '"');
                 break;
             case "number":
