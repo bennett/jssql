@@ -184,8 +184,7 @@ dbhelper.prototype.set = function (obj) {
     keys.forEach(function (item) {
         switch (typeof obj.data[item]) {
             case "string":
-            	obj.data[item].replace(/"/g, '""'); 		// add string escape
-                vals.push('"' + obj.data[item] + '"');
+                vals.push('"' + obj.data[item].replace(/"/g, '""') + '"');
                 break;
             case "number":
                 vals.push(obj.data[item]);
@@ -256,8 +255,7 @@ dbhelper.prototype.update = function (obj) {
     keys.forEach(function (item) {
         switch (typeof obj.data[item]) {
             case "string":
-            	obj.data[item].replace(/"/g, '""'); 		// add string escape
-                sets.push(item + ' = "' + obj.data[item] + '"');
+                sets.push(item + ' = "' + obj.data[item].replace(/"/g, '""') + '"');
                 break;
             case "number":
                 sets.push(item + ' = ' + obj.data[item]);
